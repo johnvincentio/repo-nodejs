@@ -1,0 +1,74 @@
+
+mkdir -p script
+mkdir test
+
+package.json:
+{
+  "name": "hello-jenkins",
+  "description": "hello jenkins test app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.12.0"
+  },
+  "devDependencies": {
+    "mocha": "1.20.1",
+    "supertest": "0.13.0"
+  }
+}
+
+app.js:
+var express = require('express');
+
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
+
+app.listen(process.env.PORT || 5000);
+
+module.exports = app;
+
+
+npm install
+
+node app.js
+
+localhost:5000
+
+cd test
+vi test.js:
+var request = require('supertest');
+var app = require('../app.js');
+
+describe('GET /', function() {
+  it('respond with hello world', function(done) {
+    request(app).get('/').expect('hello world', done);
+  });
+});
+
+To run tests:
+cd ..
+./node_modules/.bin/mocha ./test/test.js
+
+Script to run the tests:
+cd script
+vi test:
+
+#!/bin/sh
+./node_modules/.bin/mocha ./test/test.js
+
+chmod +x test
+
+cd ..
+./script/test
+
+
+
+
+
+
+
+
+

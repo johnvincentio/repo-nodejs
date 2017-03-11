@@ -1,0 +1,10 @@
+#!/bin/sh
+
+ssh jv@localhost <<EOF
+  cd ~/production/repo_nodejs
+  git pull
+  cd brackets/jenkins-test
+  npm install --production
+  forever restartall
+  exit
+EOF

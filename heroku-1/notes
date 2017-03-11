@@ -1,0 +1,38 @@
+ref:
+https://www.youtube.com/watch?v=uLF_hmtxAsY
+
+create server.js
+npm init
+
+create Procfile
+
+git init
+git status
+git add .
+git commit -m “first commit"
+git status
+
+heroku login
+email:
+password:
+
+heroku create jv-very-simple-heroku-node
+
+Creating jv-very-simple-heroku-node... done, stack is cedar-14
+https://jv-very-simple-heroku-node.herokuapp.com/ | https://git.heroku.com/jv-very-simple-heroku-node.git
+Git remote heroku added
+
+git push heroku master
+Notice:
+https://jv-very-simple-heroku-node.herokuapp.com/ deployed to Heroku
+
+Adds app to Heroku
+
+Notice
+
+Heroku commands
+List apps:
+heroku apps
+
+Delete app:
+heroku apps:destroy --app jv-very-simple-heroku-node --confirm jv-very-simple-heroku-node

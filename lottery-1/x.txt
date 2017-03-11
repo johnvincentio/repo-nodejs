@@ -1,0 +1,7 @@
+j 0 winners[j] 16
+j 1 winners[j] 19
+j 2 winners[j] 32
+j 3 winners[j] 34
+j 4 winners[j] 57
+j 5 winners[j] 13
+length 6
