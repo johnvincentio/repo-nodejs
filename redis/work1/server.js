@@ -3,6 +3,7 @@
 const express = require('express');
 
 const axios = require('axios');
+const redis = require('redis');
 
 require('dotenv').config();
 
@@ -24,6 +25,17 @@ const instance = axios.create({
 	headers: { Referer: env.YOUTUBE_REFERER }
 });
 
+const client = redis.createClient();
+
+client.on('connect', () => {
+	console.log('Redis client connected');
+});
+
+// Print redis errors to the console
+client.on('error', err => {
+	console.log(`Error ${err}`);
+});
+
 const app = express();
 
 app.get('/api/search', (req, res) => {
@@ -38,12 +50,15 @@ app.get('/api/search', (req, res) => {
 	}
 	console.log(`query string :${query}:`);
 
+	const redisKey = `youtube:${query}`;
+
 	return instance
 		.get('/search', {
 			params: { q: query }
 		})
 		.then(response => {
 			console.log('found ', response.data.items.length);
+			client.set(redisKey, JSON.stringify({ items: response.data.items }));
 			return res.status(200).json({ items: response.data.items });
 		})
 		.catch(error => {
@@ -62,7 +77,6 @@ app.get('/api/search', (req, res) => {
 				// Something happened in setting up the request that triggered an Error
 				console.log('Error', error.message);
 			}
-			console.log(error.config);
 			return res.status(500).json({ message: 'Internal Server error' });
 		});
 });
@@ -70,3 +84,10 @@ app.get('/api/search', (req, res) => {
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}`);
 });
+
+/*
+Use: client.set('key', JSON.stringify({example: {field: 'testing', field1: 333 }, field: 123}, () => {});
+client.get('key', (err, data) => {
+console.log(JSON.parse(data);
+});
+*/
