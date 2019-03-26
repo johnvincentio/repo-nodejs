@@ -1,0 +1,51 @@
+{
+  "name": "work1",
+  "version": "1.0.0",
+  "description": "change-this",
+  "repository": {
+    "type": "git",
+    "url": "git://git@github.com:johnvincentio/change-repo.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "esdoc": "./node_modules/.bin/esdoc -c ./esdoc.json",
+    "test": "LOG_LEVEL=info mocha ./test --exit",
+    "nodemon": "nodemon server.js",
+    "start": "node server.js",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
+    "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
+    "eslint-versions": "npm info eslint-config-airbnb@latest peerDependencies"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "acorn": "^6.1.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "esdoc": "^1.1.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "faker": "^4.1.0",
+    "mocha": "^6.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "joi": "^14.3.1",
+    "morgan": "^1.9.1",
+    "redis": "^2.8.0",
+    "response-time": "^2.3.2",
+    "serve-favicon": "^2.5.0",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
+  }
+}

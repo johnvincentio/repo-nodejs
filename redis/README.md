@@ -2,6 +2,8 @@
 
 [Redis](https://redis.io/)
 
+[Redis Commands](https://redis.io/commands)
+
 [ref](https://hackernoon.com/using-redis-with-node-js-8d87a48c5dd7)
 
 [ref](https://www.codementor.io/brainyfarm/caching-with-redis-node-js-example-h6o9ii72i)
@@ -98,10 +100,22 @@ Basic Test
 ```
 redis 127.0.0.1:6379> ping
 PONG
-redis 127.0.0.1:6379> set mykey somevalue
+redis 127.0.0.1:6379> set mykey hello
 OK
 redis 127.0.0.1:6379> get mykey
-"somevalue"
+"hello"
 ```
+
+## Node Application
+
+```
+npm install --save axios redis response-time
+```
+
+[Google API Manager](https://console.developers.google.com/)
+
+* Select the Project
+* From Credentials, select the api key
+* Add to HTTP referrers `localhost:8080`
 
 
