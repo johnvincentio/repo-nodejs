@@ -1,11 +1,29 @@
 //
 
-class Food {}
-
 class Animal {
 	constructor(howMany) {
 		this.howMany = howMany;
 		this.energy = 0;
+	}
+
+	randomFood() {
+		const random = Math.floor(Math.random() * 4) + 1;
+		console.log('randomFood; random ', random);
+		switch (random) {
+			case 1:
+				this.energy += 30; // meat
+				break;
+			case 2:
+				this.energy += 20; // fish
+				break;
+			case 3:
+				this.energy += 2; // bugs
+				break;
+			case 4:
+			default:
+				this.energy += 10; // grain
+				break;
+		}
 	}
 
 	randomAct() {
@@ -45,6 +63,23 @@ class Tiger extends Animal {
 
 	sleep() {
 		this.energy += 5;
+	}
+
+	randomFood() {
+		const random = Math.floor(Math.random() * 3) + 1;
+		console.log('randomFood; random ', random);
+		switch (random) {
+			case 1:
+				this.energy += 30; // meat
+				break;
+			case 2:
+				this.energy += 20; // fish
+				break;
+			case 3:
+			default:
+				this.energy += 2; // bugs
+				break;
+		}
 	}
 }
 
@@ -116,6 +151,7 @@ const monkies = new Monkey(10);
 const snakes = new Snake(25);
 
 const jungle = new Jungle(tigers, monkies, snakes);
+
 // jungle.test();
 
 // jungle.soundOff();
