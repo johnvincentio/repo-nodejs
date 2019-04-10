@@ -1,5 +1,9 @@
 //
 
+// class Food {
+
+// }
+
 class Animal {
 	constructor(howMany) {
 		this.howMany = howMany;
@@ -20,9 +24,9 @@ class Animal {
 }
 
 class Tiger extends Animal {
-	constructor(howMany) {
-		super(howMany);
-	}
+	// constructor(howMany) {
+	// 	super(howMany);
+	// }
 
 	sleep() {
 		this.energy += 5;
@@ -30,9 +34,9 @@ class Tiger extends Animal {
 }
 
 class Monkey extends Animal {
-	constructor(howMany) {
-		super(howMany);
-	}
+	// constructor(howMany) {
+	// 	super(howMany);
+	// }
 
 	makeSound() {
 		this.energy -= 4;
@@ -52,12 +56,7 @@ class Monkey extends Animal {
 	}
 }
 
-class Snake extends Animal {
-	constructor(howMany) {
-		super(howMany);
-		this.play = false;
-	}
-}
+class Snake extends Animal {}
 
 class Jungle {
 	constructor(tigers, monkies, snakes) {
