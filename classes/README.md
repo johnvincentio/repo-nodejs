@@ -30,6 +30,8 @@ Tigers can't eat grain because they have sensitive digestive systems.
 
 Bonus Item: The jungle can have each animal perform a random activity out of the ones possible for that animal.
 
+# old code
+
 const tigers = new Tiger(3);
 const monkies = new Monkey(10);
 const snakes = new Snake(25);

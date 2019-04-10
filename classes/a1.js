@@ -1,13 +1,28 @@
 //
 
-// class Food {
-
-// }
+class Food {}
 
 class Animal {
 	constructor(howMany) {
 		this.howMany = howMany;
 		this.energy = 0;
+	}
+
+	randomAct() {
+		const random = Math.floor(Math.random() * 3) + 1;
+		console.log('randomAct; random ', random);
+		switch (random) {
+			case 1:
+				this.makeSound();
+				break;
+			case 2:
+				this.eatFood();
+				break;
+			case 3:
+			default:
+				this.sleep();
+				break;
+		}
 	}
 
 	makeSound() {
@@ -54,6 +69,26 @@ class Monkey extends Animal {
 			console.log('Monkey is too tired');
 		}
 	}
+
+	randomAct() {
+		const random = Math.floor(Math.random() * 4) + 1;
+		console.log('randomAct; random ', random);
+		switch (random) {
+			case 1:
+				this.makeSound();
+				break;
+			case 2:
+				this.eatFood();
+				break;
+			case 3:
+				this.sleep();
+				break;
+			case 4:
+			default:
+				this.play();
+				break;
+		}
+	}
 }
 
 class Snake extends Animal {}
@@ -81,19 +116,23 @@ const monkies = new Monkey(10);
 const snakes = new Snake(25);
 
 const jungle = new Jungle(tigers, monkies, snakes);
-jungle.test();
+// jungle.test();
 
 // jungle.soundOff();
 
 // jungle.test();
 
-monkies.play();
-monkies.eatFood();
-jungle.test();
+// monkies.play();
+// monkies.eatFood();
+// jungle.test();
 
-monkies.eatFood();
-monkies.eatFood();
-monkies.eatFood();
+// monkies.eatFood();
+// monkies.eatFood();
+// monkies.eatFood();
+// jungle.test();
+// monkies.play();
+// jungle.test();
+
 jungle.test();
-monkies.play();
+monkies.randomAct();
 jungle.test();
