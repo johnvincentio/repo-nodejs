@@ -8,9 +8,9 @@
  },
  "main": "index.js",
  "scripts": {
-	"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-	"lint": "eslint 'src/**/*.{js,jsx}' --quiet",
-	"eslint-versions": "npm info eslint-config-airbnb@latest peerDependencies",
+  "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
+  "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
+  "eslint-versions": "npm info eslint-config-airbnb@latest peerDependencies",
   "audit": "npm audit",
   "USELESS": "nothing"
  },
@@ -19,12 +19,15 @@
  "license": "ISC",
  "devDependencies": {
   "acorn": "^6.1.1",
+  "chai": "^4.2.0",
   "eslint": "^5.16.0",
   "eslint-config-airbnb": "^17.1.0",
   "eslint-config-prettier": "^4.1.0",
   "eslint-loader": "^2.1.2",
   "eslint-plugin-import": "^2.16.0",
   "eslint-plugin-jsx-a11y": "^6.2.1",
-  "eslint-plugin-react": "^7.12.4"
- }
+  "eslint-plugin-react": "^7.12.4",
+  "mocha": "^6.1.2"
+ },
+ "dependencies": {}
 }

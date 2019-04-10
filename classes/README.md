@@ -30,41 +30,17 @@ Tigers can't eat grain because they have sensitive digestive systems.
 
 Bonus Item: The jungle can have each animal perform a random activity out of the ones possible for that animal.
 
-# old code
+## Tests
 
-const tigers = new Tiger(3);
-const monkies = new Monkey(10);
-const snakes = new Snake(25);
+```
+cd /Users/jv/Desktop/MyDevelopment/github/nodejs/repo-nodejs/classes
 
-const jungle = new Jungle(tigers, monkies, snakes);
-jungle.soundOff();
+npm i mocha --save-dev
+npm i chai --save-dev
+```
 
-jungle.test();
+## Mocha
 
-class Jungle {
-constructor(numberTigers, numberMonkey, numberSnakes) {
-this.tiger = new Tiger(numberTigers);
-this.monkey = new Monkey(numberMonkey);
-this.snake = new Snake(numberSnakes);
-}
-
-    soundOff() {
-    	this.tiger.makeSound();
-    	this.monkey.makeSound();
-    	this.snake.makeSound();
-    }
-
-    tigers() {
-    	return this.tiger;
-    }
-
-    test() {
-    	console.log('test; ', this.tiger);
-    }
-
-}
-
-const jungle = new Jungle(3, 10, 25);
-jungle.soundOff();
-
-jungle.test();
+```
+../node_modules/mocha/bin/mocha test
+```

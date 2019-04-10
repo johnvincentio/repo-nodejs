@@ -1,34 +1,30 @@
 //
 
+function selectFood(maxfood) {
+	const random = Math.floor(Math.random() * maxfood) + 1;
+	// console.log('randomFood; random ', random);
+	switch (random) {
+		case 1:
+			return 'Meat';
+		case 2:
+			return 'Fish';
+		case 3:
+			return 'Bugs';
+		case 4:
+		default:
+			return 'Grain';
+	}
+}
+
 class Animal {
 	constructor(howMany) {
 		this.howMany = howMany;
 		this.energy = 0;
 	}
 
-	randomFood() {
-		const random = Math.floor(Math.random() * 4) + 1;
-		console.log('randomFood; random ', random);
-		switch (random) {
-			case 1:
-				this.energy += 30; // meat
-				break;
-			case 2:
-				this.energy += 20; // fish
-				break;
-			case 3:
-				this.energy += 2; // bugs
-				break;
-			case 4:
-			default:
-				this.energy += 10; // grain
-				break;
-		}
-	}
-
 	randomAct() {
 		const random = Math.floor(Math.random() * 3) + 1;
-		console.log('randomAct; random ', random);
+		// console.log('randomAct; random ', random);
 		switch (random) {
 			case 1:
 				this.makeSound();
@@ -44,14 +40,17 @@ class Animal {
 	}
 
 	makeSound() {
+		console.log('Make sound');
 		this.energy -= 3;
 	}
 
 	eatFood() {
+		console.log('Eating ', selectFood(4));
 		this.energy += 5;
 	}
 
 	sleep() {
+		console.log('Sleep');
 		this.energy += 10;
 	}
 }
@@ -65,21 +64,9 @@ class Tiger extends Animal {
 		this.energy += 5;
 	}
 
-	randomFood() {
-		const random = Math.floor(Math.random() * 3) + 1;
-		console.log('randomFood; random ', random);
-		switch (random) {
-			case 1:
-				this.energy += 30; // meat
-				break;
-			case 2:
-				this.energy += 20; // fish
-				break;
-			case 3:
-			default:
-				this.energy += 2; // bugs
-				break;
-		}
+	eatFood() {
+		console.log('Eating ', selectFood(3));
+		this.energy += 5;
 	}
 }
 
@@ -89,14 +76,17 @@ class Monkey extends Animal {
 	// }
 
 	makeSound() {
+		console.log('Make sound');
 		this.energy -= 4;
 	}
 
 	eatFood() {
+		console.log('Eating ', selectFood(4));
 		this.energy += 2;
 	}
 
 	play() {
+		console.log('Play');
 		if (this.energy >= 8) {
 			this.energy -= 8;
 			console.log('Oooo Oooo Oooo');
@@ -107,7 +97,7 @@ class Monkey extends Animal {
 
 	randomAct() {
 		const random = Math.floor(Math.random() * 4) + 1;
-		console.log('randomAct; random ', random);
+		// console.log('randomAct; random ', random);
 		switch (random) {
 			case 1:
 				this.makeSound();
