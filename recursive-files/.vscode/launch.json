@@ -14,6 +14,28 @@
         "ENV_1": "value1",
         "ENV_2": "value2"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "b",
+      "program": "${workspaceRoot}/b.js",
+      "args": ["arg1", "arg2"],
+      "env": {
+        "ENV_1": "value1",
+        "ENV_2": "value2"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "c",
+      "program": "${workspaceRoot}/c.js",
+      "args": ["arg1", "arg2"],
+      "env": {
+        "ENV_1": "value1",
+        "ENV_2": "value2"
+      }
     }
   ]
 }

@@ -3,12 +3,15 @@
 const jsmediatags = require('jsmediatags');
 
 function mediatags(filename) {
+	console.log('--- mediatags; filename :', filename, ':');
 	return new Promise((resolve, reject) => {
 		jsmediatags.read(filename, {
 			onSuccess(tag) {
+				console.log('onSuccess; tag ', tag);
 				resolve(tag);
 			},
 			onError(error) {
+				console.log('onError; error ', error);
 				reject(error);
 			}
 		});
