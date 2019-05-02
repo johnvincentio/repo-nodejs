@@ -1,6 +1,6 @@
 //
 
-const mediaTags = require('./mediaTags').mediatags;
+const mediaTags = require('./utils/mediaTags').mediatags;
 
 const allPromises = [];
 
