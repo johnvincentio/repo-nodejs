@@ -10,57 +10,54 @@ const ROOT_DIRECTORY = `/Users/jv/tmp/music/1`;
 
 const folders = [];
 
-function getFiles(dir) {
-	// const obj = { folder: { name: dir, files: [], jpgs: [], folders: [] } };
+function getFiles(parentIndex, dir) {
 	const index = folders.length;
-	const obj = { folder: { index, dir, folders: [] } };
-	folders[index] = { dir, files: [], jpgs: [] };
+	folders[index] = { index, dir, previous: parentIndex, next: [], mp3: [], jpg: [] };
+
+	if (parentIndex !== null) {
+		const arr = folders[parentIndex].next;
+		if (arr.findIndex(k => k === index) < 0) {
+			arr.push(index);
+		}
+	}
 
 	fs.readdirSync(dir).forEach(file => {
 		const pathname = `${dir}/${file}`;
 		// console.log('pathname :', pathname, ':');
 		const stats = fs.statSync(pathname);
-		if (stats.isDirectory()) {
-			const sub = getFiles(pathname);
-			obj.folder.folders.push(sub);
-		}
 
 		if (stats.isFile()) {
 			if (file.search(/\.jpg$/) > -1) {
-				folders[index].jpgs.push(file);
-				// obj.folder.jpgs.push(file);
+				folders[index].jpg.push(file);
 			}
 
 			if (file.search(/\.mp3$/) > -1) {
-				const sub = { file };
-				folders[index].files.push(sub);
+				// const sub = { file };
+				folders[index].mp3.push({ file });
 				// obj.folder.files.push(sub);
 			}
 		}
+		if (stats.isDirectory()) {
+			getFiles(index, pathname);
+			// obj.folder.folders.push(sub);
+		}
 	});
-
-	// console.log('obj ', obj);
-	return obj;
 }
 
-function topDir(dir) {
-	console.log('--- topDir');
-	return getFiles(dir);
-	// console.log('<<< topDir');
-}
+getFiles(null, ROOT_DIRECTORY);
 
-const tree = topDir(ROOT_DIRECTORY);
+// fs.writeFileSync('music-data.json', JSON.stringify(folders));
 
-// console.log('after topDir; tree ', tree);
+// console.log('after getFiles; folders ', folders);
 
 const allPromises = [];
 
 folders.forEach((item, folderIdx) => {
-	// console.log('item ', item);
-	item.files.forEach((file, fileIdx) => {
-		// console.log('file ', file);
+	// console.log('MakePromise; item ', item);
+	item.mp3.forEach((file, fileIdx) => {
+		// console.log('MakePromise; file.file ', file.file);
 		const pathname = `${item.dir}/${file.file}`;
-		// console.log('pathname ', pathname);
+		// console.log('MakePromise; pathname ', pathname);
 		allPromises.push(mediaTags(folderIdx, fileIdx, pathname));
 	});
 });
@@ -69,11 +66,13 @@ Promise.all(allPromises).then(values => {
 	// console.log('values ', values);
 	values.forEach(value => {
 		const folder = folders[value.folderIdx];
-		folder.files[value.fileIdx].obj = value;
+		folder.mp3[value.fileIdx].tags = value;
 	});
-	const obj = { tree, folders };
+	const obj = { folders };
 	fs.writeFileSync('music-data.json', JSON.stringify(obj));
 });
+
+// rubbish from here
 
 // const jv = getFiles(ROOT_DIRECTORY);
 // const str = JSON.stringify(jv);
