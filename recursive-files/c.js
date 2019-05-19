@@ -4,9 +4,9 @@ const fs = require('fs');
 
 const mediaTags = require('./utils/mediaTags').mediatags;
 
-// const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_Music`;
+const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_Music`;
 // const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_MUSIC/Other`;
-const ROOT_DIRECTORY = `/Users/jv/tmp/music/1`;
+// const ROOT_DIRECTORY = `/Users/jv/tmp/music/1`;
 
 const folders = [];
 
@@ -44,14 +44,16 @@ function getFiles(parentIndex, dir) {
 	});
 }
 
+console.log('Start getFiles');
 getFiles(null, ROOT_DIRECTORY);
+console.log('Finished getFiles');
 
 // fs.writeFileSync('music-data.json', JSON.stringify(folders));
 
 // console.log('after getFiles; folders ', folders);
 
+console.log('Start MakePromises');
 const allPromises = [];
-
 folders.forEach((item, folderIdx) => {
 	// console.log('MakePromise; item ', item);
 	item.mp3.forEach((file, fileIdx) => {
@@ -61,7 +63,9 @@ folders.forEach((item, folderIdx) => {
 		allPromises.push(mediaTags(folderIdx, fileIdx, pathname));
 	});
 });
+console.log('Finished MakePromises; Number of Promises ', allPromises.length);
 
+console.log('Start All Promises');
 Promise.all(allPromises).then(values => {
 	// console.log('values ', values);
 	values.forEach(value => {
@@ -70,41 +74,5 @@ Promise.all(allPromises).then(values => {
 	});
 	const obj = { folders };
 	fs.writeFileSync('music-data.json', JSON.stringify(obj));
+	console.log('Finished All Promises');
 });
-
-// rubbish from here
-
-// const jv = getFiles(ROOT_DIRECTORY);
-// const str = JSON.stringify(jv);
-// console.log(str);
-
-// fs.writeFileSync('jv.json', JSON.stringify(jv));
-
-// const jv = getFiles(ROOT_DIRECTORY);
-
-// const promises = Promise.all(allPromises).then(values => {
-// 	console.log('values ', values);
-// 	// console.log('jv ', jv);
-// });
-
-// console.log('promises ', promises);
-
-// function showData(data) {
-// 	const jv = 12;
-// }
-
-// jv.folder.folders.map(item => {
-// 	console.log('item ', item);
-// });
-
-// showData(jv);
-
-// const map = folders.map(item => {
-// 	console.log('item ', item);
-// 	item.files.map(file => {
-// 		console.log('file ', file);
-// 		const pathname = `${item.dir}/${file.file}`;
-// 		console.log('pathname ', pathname);
-// 	});
-// 	// allPromises.push(mediaTags());
-// });
