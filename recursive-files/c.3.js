@@ -4,15 +4,15 @@ const fs = require('fs');
 
 const mediaTags = require('./utils/mediaTags').mediatags;
 
-const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_Music`;
+// const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_Music`;
 // const ROOT_DIRECTORY = `/Users/jv/Desktop/MyDocs/JV_MUSIC/Other`;
-// const ROOT_DIRECTORY = `/Users/jv/tmp/music/1`;
+const ROOT_DIRECTORY = `/Users/jv/tmp/music/1`;
 
 const folders = [];
 
-function getFiles(parentIndex, name, dir) {
+function getFiles(parentIndex, dir) {
 	const index = folders.length;
-	folders[index] = { index, name, dir, previous: parentIndex, next: [], mp3: [], jpg: [] };
+	folders[index] = { index, dir, previous: parentIndex, next: [], mp3: [], jpg: [] };
 
 	if (parentIndex !== null) {
 		const arr = folders[parentIndex].next;
@@ -38,14 +38,14 @@ function getFiles(parentIndex, name, dir) {
 			}
 		}
 		if (stats.isDirectory()) {
-			getFiles(index, file, pathname);
+			getFiles(index, pathname);
 			// obj.folder.folders.push(sub);
 		}
 	});
 }
 
 console.log('Start getFiles');
-getFiles(null, '/', ROOT_DIRECTORY);
+getFiles(null, ROOT_DIRECTORY);
 console.log('Finished getFiles');
 
 // fs.writeFileSync('music-data.json', JSON.stringify(folders));
