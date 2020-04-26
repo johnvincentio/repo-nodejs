@@ -50,7 +50,6 @@ const saveFile = (letter, data) => {
 
 const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
 // const strArray = [ ...'ab'];
-// const strArray = [ ...'ab'];
 strArray.forEach(letter => {
 	getPage(letter, parser);
 })
