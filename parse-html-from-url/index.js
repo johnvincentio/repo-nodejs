@@ -56,7 +56,7 @@ const saveFile = (letter, data) => {
 	content += `export default words${letter.toUpperCase()};\n`;
 
 	console.log('__dirname ', __dirname);
-	fs.writeFileSync(__dirname + `/words${letter}.js`, content);
+	fs.writeFileSync(__dirname + `/words${letter.toUpperCase()}.js`, content);
 }
 
 /*
@@ -70,7 +70,7 @@ export default wordsA;
 
 // const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
 // const strArray = [ ...'ab'];
-const strArray = [ ...'a'];
+const strArray = [ ...'ab'];
 strArray.forEach(letter => {
 	getPage(letter, parser);
 })
