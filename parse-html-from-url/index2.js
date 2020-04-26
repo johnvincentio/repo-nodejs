@@ -16,11 +16,14 @@ const saveFile = () => {
 
 	content += `export function randomWord() {\n`;
 
+	content += `\tconst letters = [ ...'abcdefghijklmnopqrstuvwxyz'];\n`
 	content += `\tconst rnd = letters[Math.floor(Math.random() * 26)];\n`
 	content +=`\tswitch(rnd) {\n`;
 
 	strArray.forEach((letter, idx) => {
 		content += `\t\tcase ${idx}:\n`;
+		if (idx === 0)
+			content += `\t\tdefault:\n`
 		content += `\t\t\treturn words${letter.toUpperCase()}();\n`
 	});
 
