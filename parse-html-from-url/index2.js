@@ -2,14 +2,11 @@
 
 const fs = require('fs');
 
-// const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
+const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
 // const strArray = [ ...'ab'];
-const strArray = [ ...'ab'];
-
-console.log('in index2')
+// const strArray = [ ...'ab'];
 
 const saveFile = () => {
-	console.log('in saveFile')
 	let content = `//\n\n`;
 
 	strArray.forEach(letter => {
@@ -21,7 +18,13 @@ const saveFile = () => {
 
 	content += `\tconst rnd = letters[Math.floor(Math.random() * 26)];\n`
 	content +=`\tswitch(rnd) {\n`;
-	content += `\t}\n\n`;
+
+	strArray.forEach((letter, idx) => {
+		content += `\t\tcase ${idx}:\n`;
+		content += `\t\t\treturn words${letter.toUpperCase()}();\n`
+	});
+
+	content += `\t}\n`;
 
 	content += `}\n\n`;
 	content += `export default randomWord;\n`;
@@ -30,28 +33,3 @@ const saveFile = () => {
 }
 
 saveFile();
-
-/*
-import { wordsA } from './wordsA';
-import { b } from './b';
-
-export function randomWord() {
-	const letters = [ ...'abcdefghijklmnopqrstuvwxyz'];
-	console.log('letters ', letters)
-
-	const letter = letters[Math.floor(Math.random() * 2)];
-	console.log('letter :', letter, ':');
-	switch(letter) {
-		case 'b':
-			console.log('doing b')
-			return b();
-		case 'a':
-		default:
-			console.log('doing a')
-			return wordsA();
-	}
-}
-
-export default randomWord;
-*/
-
