@@ -45,14 +45,12 @@ const saveFile = (letter, data) => {
 	content += `\treturn words[Math.floor(Math.random() * words.length)];\n`;
 	content += `}\n\n`;
 	content += `export default words${letter.toUpperCase()};\n`;
-
-	console.log('__dirname ', __dirname);
 	fs.writeFileSync(__dirname + `/words${letter.toUpperCase()}.js`, content);
 }
 
-// const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
+const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
 // const strArray = [ ...'ab'];
-const strArray = [ ...'ab'];
+// const strArray = [ ...'ab'];
 strArray.forEach(letter => {
 	getPage(letter, parser);
 })
