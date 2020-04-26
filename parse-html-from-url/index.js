@@ -6,19 +6,17 @@ const request = require('request');
 const fs = require('fs');
 const { parse } = require('node-html-parser');
 
-const url = `https://randomword.com/words/a.html`;
-
-const getPage = ( cb ) => {
-	request(url, {
+const getPage = ( letter, cb ) => {
+	request(`https://randomword.com/words/${letter}.html`, {
 			timeout: 3000
 	}, (error, response, body) => {
 			if (! error) {
-				cb(body);
+				cb(letter, body);
 			}
 	});
 };
 
-const parser = html => {
+const parser = (letter, html) => {
 	const root = parse(html);
 	// console.log(root.querySelector('.word-list .wordlist li'));
 	const elements = root.querySelector('.word-list .wordlist');
@@ -32,22 +30,27 @@ const parser = html => {
 			arr.push(item.structuredText.trim());
 		}
 	});
-	console.log('Solutions: ', arr.length);
+	console.log('Letter ', letter, ' Solutions ', arr.length);
 	// console.log('arr ', arr);
-	saveFile(arr);
+	saveFile(letter, arr);
 }
 
-const saveFile = data => {
+const saveFile = (letter, data) => {
 	let content = '';
 	data.forEach(word => {
 		content += `"${word}",\n`;
 	});
 	console.log('__dirname ', __dirname);
-	fs.writeFileSync(__dirname + `/wordsA.js`, content);
-
+	fs.writeFileSync(__dirname + `/words${letter}.js`, content);
 }
 
-getPage(parser);
+// const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
+const strArray = [ ...'ab'];
+strArray.forEach(letter => {
+	getPage(letter, parser);
+})
+
+// getPage(parser);
 
 /*
 const getPage = ( cb ) => {
