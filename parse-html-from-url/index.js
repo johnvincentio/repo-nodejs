@@ -1,7 +1,5 @@
 // 
 
-// https://randomword.com/words/a.html
-
 const request = require('request');
 const fs = require('fs');
 const { parse } = require('node-html-parser');
@@ -17,28 +15,21 @@ const getPage = ( letter, cb ) => {
 };
 
 const parser = (letter, html) => {
+	const valid = /^[a-z]+$/;
 	const root = parse(html);
-	// console.log(root.querySelector('.word-list .wordlist li'));
-	// const elements = root.querySelector('.word-list .wordlist');
 	const elements = root.querySelector('.word-list');
-	// console.log('elements ', elements);
 	const arr = [];
 	elements.childNodes.forEach(subElement => {
-		// console.log('subElement :', subElement, ':');
 		if (subElement.childNodes.length > 0) {
-
 			subElement.childNodes.forEach(item => {
-				// console.log('item :', item, ':');
 				if (item.childNodes.length === 1) {
-					// item.structuredText
-					// console.log('item ', item);
-					arr.push(item.structuredText.trim());
+					const str = item.structuredText.trim().toLowerCase();
+					if (str.match(valid)) arr.push(str);
 				}
 			});
 		}
 	});
 	console.log('Letter ', letter, ' Solutions ', arr.length);
-	// console.log('arr ', arr);
 	saveFile(letter, arr);
 }
 
@@ -59,36 +50,9 @@ const saveFile = (letter, data) => {
 	fs.writeFileSync(__dirname + `/words${letter.toUpperCase()}.js`, content);
 }
 
-/*
-	];
-	return words[Math.floor(Math.random() * words.length)];
-}
-
-export default wordsA;
-*/
-
-
 // const strArray = [ ...'abcdefghijklmnopqrstuvwxyz'];
 // const strArray = [ ...'ab'];
 const strArray = [ ...'ab'];
 strArray.forEach(letter => {
 	getPage(letter, parser);
 })
-
-// getPage(parser);
-
-/*
-const getPage = ( cb ) => {
-	request(url, {
-			timeout: 3000
-	}, (error, response, body) => {
-			if (! error) {
-				// cb(body);
-				// console.log('body ', body);
-				const root = parse(body);
-				console.log(root.querySelector('.word-list .wordlist li'));
-
-			}
-	});
-};
-*/
