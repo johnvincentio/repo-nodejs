@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "acorn": "^6.1.1",
+    "acorn": "^6.4.1",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "esdoc": "^1.1.0",
